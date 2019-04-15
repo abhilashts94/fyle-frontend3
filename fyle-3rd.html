@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.min.js"
+      integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 3px;
+        bottom: 3px;
+        background-color: #2196f3;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      input:checked + .slider {
+        background-color: lightgrey;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      .offer {
+        font-size: 18px;
+      }
+
+      div button.active {
+        background-color: grey;
+        color: #ccc;
+      }
+    </style>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("label").on("click", function() {
+          $("label:has(input:checked)").addClass("active");
+          $("label:has(input:not(:checked))").removeClass("active");
+          $('input[type="checkbox"]').is(function() {
+            if ($(this).is(":checked")) {
+              monthly();
+            } else if ($(this).is(":not(:checked)")) {
+              annually();
+            }
+          });
+        });
+
+        $('input[type="checkbox"]').click(function() {
+          if ($(this).is(":checked")) {
+            monthly();
+          } else if ($(this).is(":not(:checked)")) {
+            annually();
+          }
+        });
+      });
+
+      function annually() {
+        var annu = $("input:checked").val();
+
+        var fannu = Math.ceil(annu * 0.5);
+        var iceamt = Math.ceil(annu * 1);
+        var savngamt = iceamt - fannu;
+        document.getElementById("demo1").innerHTML = "$" + fannu;
+        document.getElementById("Icecandy1").innerHTML = "$" + iceamt;
+        document.getElementById("savingamt").innerHTML = "$" + savngamt;
+      }
+      function monthly() {
+        var annu1 = $("input:checked").val();
+        var miceamt = Math.ceil(annu1 * 2);
+        var savngamt1 = miceamt - annu1;
+        document.getElementById("demo1").innerHTML = "$" + annu1;
+
+        document.getElementById("Icecandy1").innerHTML = "$" + miceamt;
+        document.getElementById("savingamt").innerHTML = "$" + savngamt1;
+      }
+    </script>
+  </head>
+  <body>
+    <form>
+      <div class="display-3 text-center my-4">
+        <div>
+          <h1>
+            Looking for a lollipop alternative?
+          </h1>
+        </div>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-primary active">
+            <input
+              type="radio"
+              name="options"
+              id="option1"
+              autocomplete="off"
+              value="13"
+              checked
+            />
+            25 serving
+          </label>
+          <label class="btn btn-primary">
+            <input
+              type="radio"
+              name="options"
+              id="option3"
+              value="25"
+              autocomplete="off"
+            />
+            50 serving
+          </label>
+          <label class="btn btn-primary">
+            <input
+              type="radio"
+              name="options"
+              id="option3"
+              value="50"
+              autocomplete="off"
+            />
+            100 serving
+          </label>
+
+          <label class="btn btn-primary">
+            <input
+              type="radio"
+              name="options"
+              id="option3"
+              value="100"
+              autocomplete="off"
+            />
+            200 serving
+          </label>
+        </div>
+        <div id="demo"></div>
+
+        <div class="row justify-content-center mt-2">
+          <div>
+            <h3 class="mr-2">Annual</h3>
+            <h3 class="offer">50% off</h3>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+          <h3 class="ml-2">Monthly</h3>
+        </div>
+
+        <div class="row justify-content-center mt-2">
+          <div class="card" style="width: 5em;">
+            <div class="card-body">
+              <h3 class="card-title">lollipop</h3>
+              <h3 class="card-text" id="demo1">
+                $13
+              </h3>
+              <h3 class="text-muted" style="font-size: 14px" ;>Per month</h3>
+
+              <h3 class="card-text">for 100 serving</h3>
+            </div>
+          </div>
+          <div class="card ml-2" style="width: 20rem;">
+            <div class="card-body">
+              <h3 class="card-title">Icecandy</h3>
+              <h3 class="card-text" id="Icecandy1">
+                $200
+                <span class="text-muted" style="font-size: 14px" ;
+                  >Per month</span
+                >
+              </h3>
+              <h3 class="card-text">for 100 serving</h3>
+            </div>
+          </div>
+          <div
+            class="card shadow-lg bg-light rounded ml-2"
+            style="width: 20rem;"
+          >
+            <div class="card-body">
+              <h3 class="card-text" style="font-size: 18px;">
+                Your saving with
+              </h3>
+              <h3 class="card-text" style="font-size: 18px;">lollipop</h3>
+              <h3 class="card-text" id="savingamt" style="font-size: 30px;">
+                $100
+              </h3>
+              <h3 class="card-text text-muted" style="font-size: 18px" ;>
+                /year
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
